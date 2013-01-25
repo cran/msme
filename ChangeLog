@@ -1,0 +1,29 @@
+2011-08-16  Andrew Robinson  <andrewpr@ms.unimelb.edu.au>
+
+	* Version 0.3.0
+	Combined the poisson and binomial ML functions into one function,
+	which uses the link functions developed under irls, and also
+	requires the jll for each family. Needs extensive testing.  Also
+	wrote deviance residuals in terms of the jll.  Very happy with
+	this, just so long as it actually works.
+
+2011-07-26  Andrew Robinson  <andrewpr@ms.unimelb.edu.au>
+
+	* Version 0.2.0
+	Added a clutch of ML functions.  Added a new class: msme, which
+	will be a catch-all for methods that are general to the book ---
+	for example, we can use just one summary function if we plan it
+	correctly.  Next I have to massage the outputs and think about the
+	link functions and the families.
+
+	Also figured out how to deploy automatic testing, by including
+	test scripts in the test directory.  Makes sense, really.
+
+	* Version 0.1.1
+	Fixed the residual function for gamma, which had incorrect
+	arguments and needed a reverse in sign within the square root.
+
+2011-07-22  Andrew Robinson  <andrewpr@ms.unimelb.edu.au>
+
+	* Version 0.1.0 Initial release, with irls and ML for normal
+	fitting function and methods.

@@ -1,0 +1,5 @@
+import(MASS, lattice, ggplot2)
+#exportPattern("^[^\\.]")
+export(irls, ml_g, ml_glm, ml_glm2, ml_glm3,
+       summary.msme, residuals.msme, hatvalues.msme, summary.ml_g_fit)
+
