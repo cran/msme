@@ -6,49 +6,49 @@ unlink <- function(y, eta, m, a) UseMethod("unlink")
 variance <- function(mu, m, a) UseMethod("variance")
 
 
-devianceResids <- function(y, mu, m, a)
+devianceResids <- function(y, mu, m = 1, a = 1)
   sign(y - mu) * sqrt(2 * abs(jllm(y, mu, m, a) -
                               jllm(y, y,  m, a)))
 
 devIRLS <- function(object, ...)
    sum(devianceResids(object, ...)^2)
 
-initialize <- function(y, m) {
+initialize <- function(y, m = 1) {
    ret.y <- rep(mean(y), length(y))
    class(ret.y) <- class(y)
    ret.y
 }
 
-jllm.binomial <- function(y, mu, m, a) 
+jllm.binomial <- function(y, mu, m = 1, a = 1) 
   dbinom(x = y, size = m, prob = mu / m, log = TRUE)
-jllm.negBinomial <- function(y, mu, m, a) {
+jllm.negBinomial <- function(y, mu, m = 1, a = 1) {
   dnbinom(y, mu = mu, size = 1 / a, log = TRUE)
 }
-jllm.poisson <- function(y, mu, m, a) {
+jllm.poisson <- function(y, mu, m = 1, a = 1) {
   dpois(x = y, lambda = mu, log = TRUE)
 }
 
 
-variance.binomial <- function(mu, m, a) mu * (1 - mu/m)
-variance.negBinomial <- function(mu, m, a) mu + a*mu^2
-variance.poisson <- function(mu, m, a) mu
+variance.binomial <- function(mu, m = 1, a = 1) mu * (1 - mu/m)
+variance.negBinomial <- function(mu, m = 1, a = 1) mu + a*mu^2
+variance.poisson <- function(mu, m = 1, a = 1) mu
 
 
 linkFn.logit <- function(mu, m = 1, a = 1) log(mu / (m - mu))
 lPrime.logit <- function(mu, m = 1, a = 1) m / (mu * (m - mu))
 unlink.logit <- function(y, eta, m = 1, a = 1) m / (1 + exp(-eta))
 
-linkFn.probit <- function(mu, m, a) qnorm(mu / m)
-lPrime.probit <- function(mu, m, a) 1 / (m * dnorm(qnorm(mu/m)))
-unlink.probit <- function(y, eta, m, a) m * pnorm(eta)
+linkFn.probit <- function(mu, m = 1, a = 1) qnorm(mu / m)
+lPrime.probit <- function(mu, m = 1, a = 1) 1 / (m * dnorm(qnorm(mu/m)))
+unlink.probit <- function(y, eta, m = 1, a = 1) m * pnorm(eta)
 
-linkFn.log <- function(mu, m, a) log(mu)
-lPrime.log <- function(mu, m, a) 1/mu
-unlink.log <- function(y, eta, m, a) exp(eta)  
+linkFn.log <- function(mu, m = 1, a = 1) log(mu)
+lPrime.log <- function(mu, m = 1, a = 1) 1/mu
+unlink.log <- function(y, eta, m = 1, a = 1) exp(eta)  
 
-linkFn.identity <- function(mu, m, a) mu
-lPrime.identity <- function(mu, m, a) 1
-unlink.identity <- function(y, eta, m, a) eta
+linkFn.identity <- function(mu, m = 1, a = 1) mu
+lPrime.identity <- function(mu, m = 1, a = 1) 1
+unlink.identity <- function(y, eta, m = 1, a = 1) eta
 
 linkFn.negbin <- function(mu, m=1, a=1) -log(1+1/(a*mu))
 lPrime.negbin <- function(mu, m=1, a=1) 1/(mu+a*mu^2)
@@ -86,8 +86,16 @@ Sjll <- function(b.hat, X, y, offset = 0, ...) {
   sum(jll(y, y.hat, ...))
 }
 
+## Changed arguments for logit1 
+
 # unlink <- function(y, eta) UseMethod("unlink")
-unlink.logit1 <- function(y, eta, m, a) 1 / (1 + exp(-eta))
+unlink.logit1 <- function(y, eta, m=1, a=1) 1 / (1 + exp(-eta))
+unlink.cloglog1 <- function(y, eta, m=1, a=1) 1-exp(-exp(eta))
+unlink.probit1 <- function(y, eta, m=1, a=1) pnorm(eta)
+
+unlink.logit1 <- function(y, eta, ...) 1 / (1 + exp(-eta))
+unlink.cloglog1 <- function(y, eta, ...) 1-exp(-exp(eta))
+unlink.probit1 <- function(y, eta, ...) pnorm(eta)
 
 maximize <- function(start, f, X, y, offset = 0, ...) {
   optim(par = start,           
@@ -134,10 +142,20 @@ jll2.negBinomial <- function(y, y.hat, scale, ...) {
           log = TRUE)
 }
 
+jll2.nb2 <- function(y, y.hat, scale) {
+  dnbinom(y,
+          size = scale,
+          mu = y.hat, log = TRUE)
+}
+
+
 unlink_s <- function(y, eta) UseMethod("unlink_s")
 
 getDispersion <- function(y, scale) UseMethod("getDispersion")
 getDispersion.negBinomial <- function(y, scale) 1
+
+getDispersion.nb2 <- function(y, scale) 1
+
 
 #kickStart.log <- function(y, X, family, offset = NULL) {
 #  coef(lm(log(y + 0.01) ~ X - 1, offset = offset))
@@ -164,3 +182,16 @@ jll2.gamma <- function(y, y.hat, scale, ...) {
 }
 
 getDispersion.gamma <- function(y, scale) scale
+
+
+pearsonResiduals2 <- function(y, b.hat, X, p, offset = 0) {
+  y.hat <- predict(y, b.hat[1:p], X[,1:p], offset)
+  scale <- predict_s(y, b.hat[-(1:p)], X[,-(1:p)])
+  (y - y.hat) / sqrt(y.hat+ 1/scale*y.hat*y.hat) 
+}
+
+
+kickStart.inverse <- function(y, X, family, offset = NULL) {
+  coef(lm(I(1/(y)) ~ X - 1), offset = offset)
+}
+

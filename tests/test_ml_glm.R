@@ -4,112 +4,113 @@
 
 library(msme)
 
-data(ufc)
-ufc <- na.omit(ufc)
-
-## Normal
-
-test.1.glm <- glm(height.m ~ dbh.cm,
-                family = gaussian,
-                data = ufc)
-
-summary(test.1.glm)
-
-test.1.g <- ml_glm2(height.m ~ dbh.cm,
-                    formula2 = ~1,
-                    data = ufc,
-                    family = "normal",
-                    mean.link = "identity",
-                    scale.link = "identity_s")
-
-summary(test.1.g)
-
-test.1a.g <- ml_glm2(height.m ~ dbh.cm,
-                    formula2 = ~1,
-                    data = ufc,
-                    family = "normal",
-                    mean.link = "identity",
-                    scale.link = "log_s")
-
-summary(test.1a.g)
-
-test.1b.g <- ml_glm2(height.m ~ dbh.cm,
-                    formula2 = ~1,
-                    data = ufc,
-                    family = "normal",
-                    mean.link = "identity",
-                    scale.link = "inverse_s")
-
-summary(test.1b.g)
-
-test.2.g <- ml_glm2(height.m ~ dbh.cm,
-                    formula2 = ~ dbh.cm,
-                    data = ufc,
-                    family = "normal",
-                    mean.link = "identity",
-                    scale.link = "log_s")
-
-summary(test.2.g)
-
-##################################################################
-
-## Negative Binomial 2 
-
-data(medpar)
+# library(msme, lib.loc="lib")
 
 library(MASS)
 
-test.3.glm <- glm.nb(los ~ hmo + white,
-                     data = medpar)
+data(medpar)
 
-summary(test.3.glm)
+denom <- rep(1:5, each=299, times=1)*100   # m : binomial denominator w medpar
+oset <- rep(1:5, each=299, times=1)*100    # offset Poisson, NB, offset w medpar
+loset <- log(oset)                         # log of oset
 
-test.3.g <- ml_glm2(los ~ hmo + white,
-                    formula2 = ~1,
-                    data = medpar,
-                    family = "negBinomial",
-                    mean.link = "log",
-                    scale.link = "inverse_s")
+## POISSON -------------------------------------------------
 
-summary(test.3.g)
+glm.poi <- glm(los ~ hmo + white,
+               family = "poisson",
+               data = medpar)
 
-oset <- rep(1:5, each=299, times=1)*100  # offset Poisson, NB, offset w medpar
-loset <- log(oset)                       # log of oset
+ml.poi <- ml_glm(los ~ hmo + white,
+                 family = "poisson",
+                 link = "log",
+                 data = medpar)
 
-test.4.glm <- glm.nb(los ~ hmo + white + offset(loset),
-                     data = medpar)
+ml.poi  
+glm.poi
 
-summary(test.4.glm)
+summary(ml.poi)
+summary(glm.poi)
 
-test.4.g <- ml_glm2(los ~ hmo + white,
-                    formula2 = ~1, 
-                    data = medpar,
-                    offset = loset,
-                    family = "negBinomial",
-                    mean.link = "log",
-                    scale.link = "inverse_s")
+## RATE POISSON
 
-summary(test.4.g)
-
-##################################################################
-
-## Gamma (inverse link) ## Mostly working 
-
-test.5.glm <- glm(los ~ hmo + white,
-                  family = Gamma,
+glm.rpoi <- glm(los ~ hmo + white + offset(loset),
+                family = poisson,
+                data = medpar)
+ml.rpoi <- ml_glm(los ~ hmo + white,
+                  family = "poisson", link = "log",
+                  offset = loset,
                   data = medpar)
 
-summary(test.5.glm)
+ml.rpoi
+glm.rpoi
 
-test.5.g <- ml_glm2(los ~ hmo + white,
-                    formula2 = ~1, 
-                    data = medpar,
-                    family = "gamma",
-                    mean.link = "inverse",
-                    scale.link = "inverse_s")
+summary(ml.rpoi)
+summary(glm.rpoi)
 
-summary(test.5.g)
+## IDENTITY POISSON ----------------------------old-----------
 
-## Fit seems to be slightly 'better' when scale is estimated at the
-## same time when assessed by AIC and SE, but deviance is identical
-## ... therefore the (supposed) error in the LL is cancelling out.
+glm.ipoi <- glm(los ~ hmo + white,
+                family = poisson(link=identity),
+                data = medpar)
+
+ml.ipoi <- ml_glm(los ~ hmo + white,
+                  family = "poisson", link = "identity",
+                  data = medpar)
+
+glm.ipoi
+ml.ipoi
+
+summary(glm.ipoi)
+summary(ml.ipoi)
+
+##  BERNOULLI LOGIT --------------------------------------------
+
+glm.logit <- glm(died ~ hmo + white,
+                 family = "binomial",
+                 data = medpar)
+ml.logit <- ml_glm(died ~ hmo + white,
+                  data = medpar,
+                  family = "bernoulli",
+                  link = "logit1")
+
+ml.logit
+glm.logit
+
+summary(ml.logit)
+summary(glm.logit)
+
+## BERNOULLI PROBIT --------------------------------------------
+
+ml.probit <- ml_glm(died ~ hmo + white,
+                    family = "bernoulli",
+                    link = "probit1",
+                    data = medpar)
+glm.probit <- glm(died ~ hmo + white,
+                  family = binomial(link=probit),
+                  data = medpar)
+
+
+ml.probit
+glm.probit
+
+summary(ml.probit)
+summary(glm.probit)
+
+## BERNOULLI CLOGLOG --------------------------------------------
+
+ml.cloglog <- ml_glm(died ~ hmo + white,
+                     family = "bernoulli",
+                     link = "cloglog1",
+                     data = medpar,
+                     verbose = 1)
+
+glm.cloglog <- glm(died ~ hmo + white,
+                   family = binomial(link=cloglog),
+                   data = medpar)
+
+ml.cloglog
+glm.cloglog
+
+summary(ml.cloglog)
+summary(glm.cloglog)
+

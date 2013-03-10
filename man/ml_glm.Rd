@@ -54,7 +54,11 @@ FALSE, ...)
 }
 
 \details{
-The object returned by the function is designed to be reported by the
+  The containing package, msme, provides the needed functions to
+  use the ml_glm function to fit the Poisson and
+  Bernoulli families, and supports the use of the
+  identity, log, logit, probit, and complementary log-log link functions. 
+  The object returned by the function is designed to be reported by the
   print.glm function. 
 }
 
@@ -77,7 +81,7 @@ The object returned by the function is designed to be reported by the
 
 \references{
 Hilbe, J.M., and Robinson, A.P. 2013. Methods of Statistical Model
-Estimation. Chapman \& Hall / CRC.
+Estimation. Chapman & Hall / CRC.
 }
 
 \author{

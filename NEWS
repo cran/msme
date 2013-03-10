@@ -1,0 +1,13 @@
+Changes in msme 0.4.2
+=====================
+
+ o Added new function 'nbinomial' to fit negative binomial regression
+   with some extra reporting, eg Pearson residuals.  
+
+ o Extended summary.msme to optionally report Pearson residuals.  
+
+ o Added new references to help files and rejigged data examples to use
+   msme functions.
+
+o Now exporting asymptotic likelihood ratio test function, alrt.
+

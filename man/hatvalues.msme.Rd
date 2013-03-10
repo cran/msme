@@ -34,7 +34,7 @@ to fit the model.  Needed to standardize the residuals.
 
 \references{
 Hilbe, J.M., and Robinson, A.P. 2013. Methods of Statistical Model
-Estimation. Chapman \& Hall / CRC.
+Estimation. Chapman & Hall / CRC.
 }
 
 \author{

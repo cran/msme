@@ -8,7 +8,7 @@ Function to fit linear regression using maximum likelihood.
 \description{
 This function demonstrates the use of maximum likelihood to fit ordinary
 least-squares regression models, by maximizing the likelihood as a
-function of the parameters.  
+function of the parameters.  Only conditional normal errors are supported.
 }
 
 \usage{

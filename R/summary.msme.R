@@ -28,8 +28,12 @@ summary.msme <- function(object, ...) {
   cat("\nCall:\n")
   print(object$call)
   cat("\nDeviance Residuals:\n")
-  print(summary(as.numeric(object$residuals)))
-  cat("\nCoefficients:\n")
+  print(summary(as.numeric(residuals(object))))
+  if(!is.null(object$presiduals)) {
+    cat("\nDeviance Residuals:\n")
+    print(summary(as.numeric(object$presiduals)))    
+  }
+  cat("\nCoefficients (all in linear predictor):\n")
   print(z.print, digits = 3, ...)
   cat("\nNull deviance:", summ$null.deviance,
       " on ", summ$df.null, "d.f.") 

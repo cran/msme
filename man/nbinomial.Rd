@@ -1,18 +1,18 @@
-\name{ml_glm2}
-\alias{ml_glm2}
+\name{nbinomial}
+\alias{nbinomial}
 
 \title{
-A function to fit generalized linear models using maximum likelihood.
+A function to fit negative binomial generalized linear models using maximum likelihood.
 }
 
 \description{
 This function fits generalized linear models by maximizing the joint
 log-likeliood, which is set in a separate function.  Two-parameter
-members of the exponential family are covered. The post-estimation
+members of the negative binomial family are covered. The post-estimation
 output is designed to work with existing reporting functions.
 }
 \usage{
-ml_glm2(formula1, formula2 = ~1, data, family, mean.link, scale.link, offset = 0, start = NULL, verbose = FALSE)
+nbinomial(formula1, formula2 = ~1, data, family="nb2", mean.link="log", scale.link="inverse_s", offset = 0, start = NULL, verbose = FALSE)
 }
 
 \arguments{
@@ -57,7 +57,7 @@ ml_glm2(formula1, formula2 = ~1, data, family, mean.link, scale.link, offset = 0
 
 \details{
   The containing package, msme, provides the needed functions to
-  use the ml_glm2 function to fit the normal and negative binomial (2),
+  use the nbinomial function to fit the negative binomial (2),
   families, and supports the use of the
   identity and log link functions. 
 
@@ -73,11 +73,17 @@ ml_glm2(formula1, formula2 = ~1, data, family, mean.link, scale.link, offset = 0
   \item{p }{the numbe of parameters estimated.}
   \item{call }{the call used for the function.}
   \item{obs }{the number of observations.}
+  \item{fitted.values }{estimated response variable.}
+  \item{linear.predictor}{linear predictor.}
   \item{df.null }{the degrees of freedom for the null model.}
   \item{df.residual }{the residual degrees of freedom.}
+  \item{pearson }{the Pearson Chi2.}
+  \item{null.pearson }{the Pearson Chi2 for the null model.}
+  \item{dispersion }{the dispersion.}
   \item{deviance }{the residual deviance.}
   \item{null.deviance }{the residual deviance for the null model.}
   \item{residuals }{the deviance residuals.}
+  \item{presiduals }{the Pearson residuals.}
   \item{coefficients }{parameter estimates.}
   \item{se.beta.hat }{standard errors of parameter estimates.}
   \item{aic }{Akaike's Information Criterion.}
@@ -99,29 +105,53 @@ Andrew Robinson and Joe Hilbe.
 %}
 
 \seealso{
-\code{\link{glm}}, \code{\link{irls}}, \code{\link{ml_glm}}, 
+\code{\link{glm}}, \code{\link{irls}}, \code{\link{ml_glm2}}, 
 }
 
 \examples{
 data(medpar)
-ml.nb2 <- ml_glm2(los ~ hmo + white,
-                    formula2 = ~1,
+
+# TRADITIONAL NB REGRESSION WITH ALPHA
+
+mynb1 <- nbinomial(los ~ hmo + white, data=medpar)
+summary(mynb1)
+
+# TRADITIONAL NB -- SHOWING ALL OPTIONS
+
+mynb2 <- nbinomial(los ~ hmo + white,
+                    formula2 = ~ 1,
+                    data = medpar,
+                    family = "nb2",
+                    mean.link = "log",
+                    scale.link = "inverse_s")
+summary(mynb2)
+
+# R GLM.NB - LIKE INVERTED DISPERSION BASED M
+
+mynb3 <- nbinomial(los ~ hmo + white,
+                    formula2 = ~ 1,
                     data = medpar,
                     family = "negBinomial",
                     mean.link = "log",
                     scale.link = "inverse_s")
+summary(mynb3)
 
-data(ufc)
+# R GLM.NB-TYPE INVERTED DISPERSON --THETA ; WITH DEFAULTS
 
-ufc <- na.omit(ufc)
-ml.g <- ml_glm2(height.m ~ dbh.cm,
-                formula2 = ~ dbh.cm,
-                data = ufc,
-                family = "normal",
-                mean.link = "identity",
-                scale.link = "log_s")
+mynb4 <- nbinomial(los ~ hmo + white, family="negBinomial", data =medpar)
+summary(mynb4)
 
-summary(ml.g)
+# HETEROGENEOUS NB; DISPERSION PARAMETERIZED
+
+mynb5 <- nbinomial(los ~ hmo + white,
+                    formula2 = ~ hmo + white,
+                    data = medpar,
+                    family = "negBinomial",
+                    mean.link = "log",
+                    scale.link = "log_s")
+summary(mynb5)
+
+
 
 }
 

@@ -1,5 +1,5 @@
 
-alrt <- function(x1, x2, ...) {
+alrt <- function(x1, x2) {
   jll1 <- logLik(x1)
   jll2 <- logLik(x2)
   df1 <- attr(jll1, "df")

@@ -33,11 +33,26 @@ Approaches to the Study of Cancer and Other Chronic Diseases,
 W. Haenszel (ed), 19: 204--268. National Cancer Institute Monograph.
 }
 \references{
-HIlbe, J., and A.P. Robinson. 2012.  Methods of Statistical Model
+Hilbe, J., and A.P. Robinson. 2012.  Methods of Statistical Model
 Estimation.  Chapman & Hall / CRC.
 }
 \examples{
 data(doll)
+
+i.glog <- irls(deaths ~ smokes + ordered(age),
+               family = "binomial",
+               link = "logit",
+               data = doll,
+               m = doll$pyears)
+summary(i.glog)
+
+glm.glog <- glm(cbind(deaths, pyears - deaths) ~ 
+                smokes + ordered(age),
+                data = doll,
+                family = binomial)
+coef(summary(glm.glog))
+
+
 }
 
 \keyword{datasets}

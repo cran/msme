@@ -53,7 +53,8 @@ ml_glm3(formula, data, family, link, offset = 0, start = NULL, verbose = FALSE, 
 \details{
 This function is essentially the same as ml_glm, but includes the dots
 argument to allow a richer set of model likelihoods to be fit, and
-omits computation of the null deviance.
+omits computation of the null deviance.  The function is presently set
+up to only fit the conditional fixed-effects negative binomial model.
 }
 
 \value{
@@ -76,7 +77,7 @@ omits computation of the null deviance.
 
 \references{
 Hilbe, J.M., and Robinson, A.P. 2013. Methods of Statistical Model
-Estimation. Chapman \& Hall / CRC.
+Estimation. Chapman & Hall / CRC.
 }
 
 \author{

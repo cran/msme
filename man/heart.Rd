@@ -40,6 +40,13 @@ first used in Hardin, JW and JM Hilbe (2001, 2007), Generalized Linear Models an
 
 \examples{
 data(heart)
+
+heart.nb <- irls(death ~ anterior + hcabg + factor(killip),
+                 a = 0.0001,
+                 offset = log(heart$cases),
+                 family = "negBinomial", link = "log",
+                 data = heart)
+
 }
 
 \keyword{datasets}

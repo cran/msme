@@ -21,16 +21,9 @@ glm.poi <- glm(los ~ hmo + white,
                family = "poisson",
                data = medpar)
 
-ml.poi <- ml_glm(los ~ hmo + white,
-                 family = "poisson",
-                 link = "log",
-                 data = medpar)
-
-ml.poi  
 irls.poi
 glm.poi
 
-summary(ml.poi)
 summary(irls.poi)
 summary(glm.poi)
 
@@ -55,16 +48,10 @@ irls.rpoi <- irls(los ~ hmo + white,
 glm.rpoi <- glm(los ~ hmo + white + offset(loset),
                 family = poisson,
                 data = medpar)
-ml.rpoi <- ml_glm(los ~ hmo + white,
-                  family = "poisson", link = "log",
-                  offset = loset,
-                  data = medpar)
 
-ml.rpoi
 irls.rpoi
 glm.rpoi
 
-summary(ml.rpoi)
 summary(irls.rpoi)
 summary(glm.rpoi)
 
@@ -92,17 +79,11 @@ glm.ipoi <- glm(los ~ hmo + white,
                 family = poisson(link=identity),
                 data = medpar)
 
-ml.ipoi <- ml_glm(los ~ hmo + white,
-                  family = "poisson", link = "identity",
-                  data = medpar)
-
 irls.ipoi
 glm.ipoi
-ml.ipoi
 
 summary(irls.ipoi)
 summary(glm.ipoi)
-summary(ml.ipoi)
 
 ## NEGATIVE BINOMIAL (NB2) ------------------------------------------
 
@@ -180,16 +161,10 @@ irls.logit <- irls(died ~ hmo + white,
 glm.logit <- glm(died ~ hmo + white,
                  family = "binomial",
                  data = medpar)
-ml.logit <- ml_glm(died ~ hmo + white,
-                  data = medpar,
-                  family = "bernoulli",
-                  link = "logit1")
 
-ml.logit
 irls.logit
 glm.logit
 
-summary(ml.logit)
 summary(irls.logit)
 summary(glm.logit)
 
@@ -328,76 +303,3 @@ summary(glm.bcloglog)
 #summary(irls.ivg)
 #summary(glm.ivg)
 
-
-## POST-ESTIMATION STATISTICS --------------------------------------
-
-## MODEL COEFFICIENTS
-irls.logit$coefficients
-
-## MODEL STANDARD ERRORS
-irls.logit$se.beta.hat
-
-## NULL DEGREES OF FREEDOM
-irls.logit$df.null
-
-## NUMBER OF OBSERVATIONS IN MODEL
-irls.logit$nobs
-
-## RESIDUAL DEGREES OF FREEDOM
-irls.logit$df.residual
-
-## DEVIANCE
-irls.logit$deviance
-
-## NULL DEVIANCE (INTERCEPT ONLY)
-# irls.logit$null.deviance
-
-## PEARSON CHI2 DISPERSION
-irls.logit$p.dispersion
-
-## PEARSON CHI2 STATISTIC
-irls.logit$pearson
-
-## LOG-LIKELIHOOD
-irls.logit$loglik
-
-## AIC STATISTIC
-irls.logit$aic
-
-## AIC STATISTIC WITH N
-irls.logit$aic/irls.logit$nobs
-
-## NUMBER MODEL PREDICTORS, INCLUDING INTERCEPT
-irls.logit$i
-
-## MODEL CALL TO IRLS FUNCTION
-irls.logit$call
-
-## GLM FAMILY USED FOR MODEL
-irls.logit$family
-
-## MU OR FIT VALUES
-mu <- irls.logit$mu
-summary(mu)
-
-## ETA OR LINEAR PREDICTOR VALUES
-eta <- irls.logit$eta
-summary(eta)
-
-## DEVIANCE RESIDUALS
-dev.res <- irls.logit$residuals
-summary(dev.res)
-
-## STANDARDIZED DEVIANCE RESIDUALS
-# residuals(irls.logit, type="standard")
-stdres <- residuals(irls.logit, type="standard")
-str(stdres)
-
-## HAT MATRIX DIAGONAL STATISTICS
-# hatvalues(irls.logit)
-hat <- hatvalues(irls.logit)
-str(hat)
-
-## DISPLAYS DATA MATRIX VALUES
-X <- irls.logit$X
-str(X)

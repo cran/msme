@@ -53,12 +53,17 @@ irls(formula, data, family, link, tol = 1e-06, offset = 0, m = 1, a = 1, verbose
     a flag to control the amount of output printed by the function.
 }
 }
+
 \details{
-   All statistics are computed at the final
-  iteration of the IRLS algorithm. The convergence criterion is the
-  magnitude of the change in deviance. The object returned by the
-  function is designed to be reported by the print.glm function. 
-}
+  The containing package, msme, provides the needed functions to
+  use the irls function to fit the Poisson, negative binomial (2),
+  Bernoulli, and binomial families, and supports the use of the
+  identity, log, logit, probit, complementary log-log, inverse,
+  inverse^2, and negative binomial link functions.  All statistics are
+  computed at the final iteration of the IRLS algorithm. The convergence
+  criterion is the magnitude of the change in deviance. The object
+  returned by the function is designed to be reported by the print.glm
+  function.  }
 
 \value{
 \item{coefficients }{parameter estimates.}
@@ -84,7 +89,7 @@ irls(formula, data, family, link, tol = 1e-06, offset = 0, m = 1, a = 1, verbose
 
 \references{
 Hilbe, J.M., and Robinson, A.P. 2013. Methods of Statistical Model
-Estimation. Chapman \& Hall / CRC.
+Estimation. Chapman & Hall / CRC.
 }
 
 \author{

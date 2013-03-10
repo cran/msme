@@ -34,9 +34,25 @@ Hilbe, Joseph M (2009), Logistic Regression Models, Chapman & Hall/CRC
 }
 \examples{
 data(titanic)
-glmlr <- glm(survived ~ age + sex + factor(class),
+
+glm.lr <- glm(survived ~ age + sex + factor(class),
              family=binomial, data=titanic)
-summary(glmlr)
-exp(coef(glmlr))
+summary(glm.lr)
+exp(coef(glm.lr))
+
+glm.irls <- irls(survived ~ age + sex + factor(class),
+                 family = "binomial",
+                 link = "cloglog",
+                 data = titanic)
+summary(glm.irls)
+exp(coef(glm.irls))
+
+glm.ml <- ml_glm(survived ~ age + sex + factor(class),
+                 family = "bernoulli",
+                 link = "cloglog1",
+                 data = titanic)
+summary(glm.ml)
+exp(coef(glm.ml))
+
 }
 \keyword{datasets}
