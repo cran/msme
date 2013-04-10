@@ -23,14 +23,18 @@ summary.msme <- function(object, ...) {
                null.deviance = object$null.deviance,
                df.residual = object$df.residual,
                df.null = object$df.null) 
-
+  if(!is.null(object$pearson)) {
+    summ$null.pearson <- object$null.pearson
+    summ$pearson <- object$pearson
+    summ$dispersion <- object$dispersion
+  }
 ### Write out a set of results
   cat("\nCall:\n")
   print(object$call)
   cat("\nDeviance Residuals:\n")
   print(summary(as.numeric(residuals(object))))
   if(!is.null(object$presiduals)) {
-    cat("\nDeviance Residuals:\n")
+    cat("\nPearson Residuals:\n")
     print(summary(as.numeric(object$presiduals)))    
   }
   cat("\nCoefficients (all in linear predictor):\n")
@@ -39,6 +43,13 @@ summary.msme <- function(object, ...) {
       " on ", summ$df.null, "d.f.") 
   cat("\nResidual deviance:", summ$deviance,
       " on ", summ$df.residual, "d.f.") 
+  if(!is.null(object$pearson)) {
+    cat("\nNull Pearson:", summ$null.pearson,
+        " on ", summ$df.null, "d.f.")
+    cat("\nResidual Pearson:", summ$pearson,
+        " on ", summ$df.residual, "d.f.")
+    cat("\nDispersion:", summ$dispersion)
+  }
   cat("\nAIC: ", object$aic)
   cat("\n\nNumber of optimizer iterations: ", object$i, "\n\n")
 

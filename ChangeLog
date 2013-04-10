@@ -1,9 +1,31 @@
+2013-04-10  Andrew Robinson  <andrewpr@ms.unimelb.edu.au>
+
+	* Version 0.4.3
+	Fixed summary.msme function to produce dispersion.
+
+2013-03-21  Andrew Robinson  <andrewpr@ms.unimelb.edu.au>
+
+	* Version 0.4.2
+	Added new function 'nbinomial' to fit negative binomial regression
+	with some extra reporting, e.g., Pearson residuals.  Extended
+	summary.msme to optionally report Pearson residuals.  Added new
+	references to help files and rejigged data examples to use msme
+	functions.  Now exporting asymptotic likelihood ratio test
+	function, alrt.
+
+2013-02-07  Andrew Robinson  <andrewpr@ms.unimelb.edu.au>
+
+	* Version 0.4.0
+	Released to CRAN.  Functions match the submitted draft.  Most
+	functions are undocumented and unexported.  Examples all run just
+	fine so book code should all run just fine too.
+
 2011-08-16  Andrew Robinson  <andrewpr@ms.unimelb.edu.au>
 
 	* Version 0.3.0
 	Combined the poisson and binomial ML functions into one function,
 	which uses the link functions developed under irls, and also
-	requires the jll for each family. Needs extensive testing.  Also
+	requires the jll for each family.  Needs extensive testing.  Also
 	wrote deviance residuals in terms of the jll.  Very happy with
 	this, just so long as it actually works.
 

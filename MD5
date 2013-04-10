@@ -1,5 +1,5 @@
-f3d75fc686e9363c4e7fa344f53bd591 *ChangeLog
-6266321488aee4f53def74bbacf950a3 *DESCRIPTION
+d3392f92effdb4293245898808c938b5 *ChangeLog
+4ed289db0eace4254772672d69f76709 *DESCRIPTION
 c5cff44ca5bafc06de8e319e3b3f6e6f *NAMESPACE
 c524445eb5e465d07377cf4a7bc7b9a5 *NEWS
 122148ddfdf97f7b626988a1e76e074b *R/P__disp.R
@@ -36,7 +36,7 @@ be1b9dddbd6a79edbdf85b264ba11db7 *R/predict_s.R
 91ce108f12622831c7a55777f5c63a79 *R/residuals.msme.R
 fc3863955bfed6232a451828f5040118 *R/se_coef.R
 38bf47fc6fff0c728f5cb50e72e99fcd *R/summary.ml_g_fit.R
-54a1a0648b82196f43b62785be12512b *R/summary.msme.R
+24334df43b70a20a0e87c9ed9a575c01 *R/summary.msme.R
 14ab254523e3400c91a36976bb421474 *R/watson.R
 c067dd293ae98207d0dddfcb89a4c77a *data/doll.rda
 010df819556904d410d8b9955b747b5d *data/heart.rda
