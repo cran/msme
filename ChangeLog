@@ -1,3 +1,9 @@
+2013-07-02  Andrew Robinson  <andrewpr@ms.unimelb.edu.au>
+
+	* Version 0.4.4
+	Added boundary flag to alrt function.  Removed reliance on ggplot2
+	and gridExtra. TRuncated help lines to pass checks.
+
 2013-04-10  Andrew Robinson  <andrewpr@ms.unimelb.edu.au>
 
 	* Version 0.4.3

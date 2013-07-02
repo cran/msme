@@ -12,7 +12,8 @@ members of the exponential family are covered. The post-estimation
 output is designed to work with existing reporting functions.
 }
 \usage{
-ml_glm2(formula1, formula2 = ~1, data, family, mean.link, scale.link, offset = 0, start = NULL, verbose = FALSE)
+ml_glm2(formula1, formula2 = ~1, data, family, mean.link, scale.link,
+        offset = 0, start = NULL, verbose = FALSE)
 }
 
 \arguments{

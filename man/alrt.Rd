@@ -13,7 +13,7 @@ to the difference in the degrees of freedom of the models.
 }
 
 \usage{
-alrt(x1, x2)
+alrt(x1, x2, boundary = FALSE)
 }
 
 \arguments{
@@ -22,6 +22,9 @@ alrt(x1, x2)
 }
   \item{x2}{
     A fitted model as an object that logLik will work for.
+}
+  \item{boundary}{
+    A flag that reports whether a boundary correction should be made.
 }
 }
 
@@ -43,8 +46,8 @@ Andrew Robinson and Joe Hilbe.
 }
 
 \note{
-The function does not provide any checks for nesting, data identity,
-etc.  
+The function does not provide any checks for nesting, data equivalence,
+etc.
 }
 
 \seealso{
@@ -59,7 +62,7 @@ ml.poi.1 <- ml_glm(los ~ hmo + white,
                    link = "log",
                    data = medpar)
 
-ml.poi.2 <- ml_glm(los ~ hmo + white,
+ml.poi.2 <- ml_glm(los ~ hmo,
                    family = "poisson",
                    link = "log",
                    data = medpar)

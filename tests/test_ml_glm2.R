@@ -40,7 +40,7 @@ ml.nb2 <- ml_glm2(los ~ hmo + white,
                     data = medpar,
                     family = "negBinomial",
                     mean.link = "log",
-                    scale.link = "inverse_s")
+                    scale.link = "log_s")
 
 glm.nb2
 ml.nb2

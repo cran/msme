@@ -12,7 +12,8 @@ members of the negative binomial family are covered. The post-estimation
 output is designed to work with existing reporting functions.
 }
 \usage{
-nbinomial(formula1, formula2 = ~1, data, family="nb2", mean.link="log", scale.link="inverse_s", offset = 0, start = NULL, verbose = FALSE)
+nbinomial(formula1, formula2 = ~1, data, family="nb2", mean.link="log",
+          scale.link="inverse_s", offset=0, start=NULL, verbose=FALSE)
 }
 
 \arguments{
