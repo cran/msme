@@ -1,5 +1,5 @@
 import(MASS, lattice)
 #exportPattern("^[^\\.]")
 export(irls, ml_g, ml_glm, ml_glm2, ml_glm3, nbinomial, alrt, plot.ml_g_fit,
-       summary.msme, residuals.msme, hatvalues.msme, summary.ml_g_fit)
+       P__disp, summary.msme, residuals.msme, hatvalues.msme, summary.ml_g_fit)
 

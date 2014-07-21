@@ -1,6 +1,6 @@
-49bb1a5c4f394d81fc6eacfd4152a1e0 *ChangeLog
-226f7dd8f240c456ac9ed1364044e701 *DESCRIPTION
-5a6d061f441fe7f00ca4a499f501474f *NAMESPACE
+2374dcaf7d13764cc6f81cf507ab4cc9 *ChangeLog
+c8c03a9ea8c79d843edc329d5637404e *DESCRIPTION
+4dfbba8a00e6b7c70030f0b97ac4a645 *NAMESPACE
 c524445eb5e465d07377cf4a7bc7b9a5 *NEWS
 122148ddfdf97f7b626988a1e76e074b *R/P__disp.R
 7d42b1ff24f9774b0866e9f229085506 *R/Sjll2.R
@@ -27,7 +27,7 @@ bc18649725cc7b81d93516c2f4206f7a *R/ml_glm_3.R
 cb9fa0c26aec80b956c77a7cd1a79c76 *R/ml_nb1.R
 f8f615db4d528d79d74e6bef143a653c *R/ml_nb2.R
 c4bfb5e0ba17560111162598f830002d *R/ml_nbc.R
-f3ccedd80051720ba342d49255a4579c *R/nbinomial1.R
+1898b22ecf2e6d936ff2403a3919517f *R/nbinomial1.R
 35764e00823240f9a1c0189198ed26f6 *R/pearson2.R
 ffc8200e9290f291e990be56adccc4e1 *R/plot.ml_g_fit.R
 e747b59d47651fae63194a3897442fc9 *R/predict.expFamily.R
@@ -51,6 +51,7 @@ c41f71ecbca8f3d3e0ecc21032e2fd57 *data/titanic.rda
 95be125f6ecfe63e221713411b5744fd *inst/5-advanced-glm.R
 2e446db0fcd25395bbb28e70b10708bd *inst/6-panel-data.R
 7e31b5d3ad6f929f6a9bb56d7ef9f793 *inst/7-bayes.R
+b8ee0584173cdf775953a971cfbae0ae *man/P__disp.Rd
 24dd4c3e103a3cea984606a3f13b99ca *man/alrt.Rd
 b34bf0d1b914122ab266fe8edf9ed344 *man/doll.Rd
 ba5f51e48a32a7bee19eb0cafbc7f5bd *man/hatvalues.msme.Rd

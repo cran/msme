@@ -1,8 +1,19 @@
+2014-07-21  Andrew Robinson  <andrewpr@ms.unimelb.edu.au>
+
+	* Version 0.5.1 
+	Nestled ml_glm2 inside nbinomial and added
+	reporting of rank to both functions
+
+2013-07-04  Andrew Robinson  <andrewpr@ms.unimelb.edu.au>
+
+	* Version 0.5.0
+	Added P__disp function.
+
 2013-07-02  Andrew Robinson  <andrewpr@ms.unimelb.edu.au>
 
 	* Version 0.4.4
 	Added boundary flag to alrt function.  Removed reliance on ggplot2
-	and gridExtra. TRuncated help lines to pass checks.
+	and gridExtra. Truncated help lines to pass checks.
 
 2013-04-10  Andrew Robinson  <andrewpr@ms.unimelb.edu.au>
 
