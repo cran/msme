@@ -71,14 +71,21 @@ ml_glm2(formula1, formula2 = ~1, data, family, mean.link, scale.link,
   \item{loglike }{the maximized log-likelihood.}
   \item{X }{the design matrix.}
   \item{y }{the response variable.}
-  \item{p }{the numbe of parameters estimated.}
+  \item{p }{the number of parameters estimated.}
+  \item{rank }{the rank of the design matrix for the mean function.}
   \item{call }{the call used for the function.}
   \item{obs }{the number of observations.}
+  \item{fitted.values }{estimated response variable.}
+  \item{linear.predictor}{linear predictor.}
   \item{df.null }{the degrees of freedom for the null model.}
   \item{df.residual }{the residual degrees of freedom.}
+  \item{pearson }{the Pearson Chi2.}
+  \item{null.pearson }{the Pearson Chi2 for the null model.}
+  \item{dispersion }{the dispersion.}
   \item{deviance }{the residual deviance.}
   \item{null.deviance }{the residual deviance for the null model.}
   \item{residuals }{the deviance residuals.}
+  \item{presiduals }{the Pearson residuals.}
   \item{coefficients }{parameter estimates.}
   \item{se.beta.hat }{standard errors of parameter estimates.}
   \item{aic }{Akaike's Information Criterion.}

@@ -25,8 +25,8 @@ ml_glm2 <- function(formula1,
 
 ### Initialize the search 
   if (is.null(start)) {
-    start <- c(kickStart(y, X1, offset),
-               1, # Shameless hack
+    start <- c(kickStart(y, X1, offset), ## FIXME
+               1, 
                rep(0, ncol(X) - p - 1))
     names(start) <- c(colnames(X1), colnames(X2))
   }
@@ -41,6 +41,7 @@ ml_glm2 <- function(formula1,
   beta.hat <- fit$par
   se.beta.hat <- sqrt(diag(solve(-fit$hessian)))
   residuals <- devianceResiduals2(y, beta.hat, X, p, offset)
+  presiduals <- pearsonResiduals2(y, beta.hat, X, p, offset)
 
 #### Deviance residuals for null 
   fit.null <- maximize(c(mean(y), 1), 
@@ -49,23 +50,39 @@ ml_glm2 <- function(formula1,
   null.deviance <-
     sum(devianceResiduals2(y,
                           c(fit.null$par[1], fit$par[p+1]),
-                          X[, c(1,p+1)],
+                          X[,c(1,p+1)],
+                          1,
+                          offset)^2)
+#### pearson residuals for null 
+  null.pearson <-
+    sum(pearsonResiduals2(y,
+                          c(fit.null$par[1], fit$par[p+1]),
+                          X[,c(1,p+1)],
                           1,
                           offset)^2)
 
+  lin.pred <- as.matrix(X)[,1:p] %*% beta.hat[1:p] + offset
+  y.hat <- unlink(y, lin.pred)
 ### Report the results, with the needs of print.glm in mind
   results <- list(fit = fit,
                   loglike = fit$val,
                   X = X,
                   y = y,
                   p = p,
+                  rank = p,
                   call = match.call(),
                   obs = length(y),
+                  fitted.values = y.hat,
+                  linear.pedictor = lin.pred,
                   df.null = length(y) - 2,
                   df.residual = length(y) - length(beta.hat),
+                  pearson = sum(presiduals^2),    
+                  null.pearson = null.pearson, 
+                  dispersion = sum(presiduals^2)/(length(y) - length(beta.hat)), 
                   deviance = sum(residuals^2),    
                   null.deviance = null.deviance, 
                   residuals = residuals,
+                  presiduals = presiduals, 
                   coefficients = beta.hat,
                   se.beta.hat = se.beta.hat,
                   aic = - 2 * fit$val + 2 * length(beta.hat),

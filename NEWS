@@ -1,3 +1,8 @@
+Changes in msme 0.4.3
+=====================
+
+ o Fixed registration of S3 methods.  
+
 Changes in msme 0.4.2
 =====================
 
@@ -9,5 +14,5 @@ Changes in msme 0.4.2
  o Added new references to help files and rejigged data examples to use
    msme functions.
 
-o Now exporting asymptotic likelihood ratio test function, alrt.
+ o Now exporting asymptotic likelihood ratio test function, alrt.
 

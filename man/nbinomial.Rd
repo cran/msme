@@ -71,7 +71,8 @@ nbinomial(formula1, formula2 = ~1, data, family="nb2", mean.link="log",
   \item{loglike }{the maximized log-likelihood.}
   \item{X }{the design matrix.}
   \item{y }{the response variable.}
-  \item{p }{the numbe of parameters estimated.}
+  \item{p }{the number of parameters estimated.}
+  \item{rank }{the rank of the design matrix for the mean function.}
   \item{call }{the call used for the function.}
   \item{obs }{the number of observations.}
   \item{fitted.values }{estimated response variable.}

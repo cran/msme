@@ -1,5 +1,19 @@
 import(MASS, lattice)
 #exportPattern("^[^\\.]")
+
+importFrom("graphics", "abline", "par", "plot")
+importFrom("stats", "coef", "dbinom", "dgamma", "dnbinom", "dnorm",
+           "dpois", "fitted", "hatvalues", "lm", "lm.fit", "logLik",
+           "model.frame", "model.matrix", "model.response", "optim",
+           "pchisq", "pnorm", "predict", "qnorm", "residuals",
+           "scatter.smooth", "sd")
+
+S3method(hatvalues, msme)
+S3method(summary, msme)
+S3method(summary, ml_g_fit)
+S3method(plot, ml_g_fit)
+S3method(residuals, msme)
+
 export(irls, ml_g, ml_glm, ml_glm2, ml_glm3, nbinomial, alrt, plot.ml_g_fit,
        P__disp, summary.msme, residuals.msme, hatvalues.msme, summary.ml_g_fit)
 

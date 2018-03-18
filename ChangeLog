@@ -2,7 +2,7 @@
 
 	* Version 0.5.1 
 	Nestled ml_glm2 inside nbinomial and added
-	reporting of rank to both functions
+	reporting of rank to both functions.
 
 2013-07-04  Andrew Robinson  <andrewpr@ms.unimelb.edu.au>
 
