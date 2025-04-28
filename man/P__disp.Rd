@@ -41,7 +41,7 @@ Hilbe, J.M., and Robinson, A.P. 2013. Methods of Statistical Model Estimation. C
 }
 
 \seealso{
-\code{\link{glm}}, \code{\link{glm.nb}}
+\code{\link{glm}}, \code{\link[MASS]{glm.nb}}
 }
 
 \examples{

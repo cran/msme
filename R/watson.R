@@ -19,7 +19,7 @@ initialize <- function(y, m = 1) {
    ret.y
 }
 
-jllm.binomial <- function(y, mu, m = 1, a = 1) 
+jllm.binomial <- function(y, mu, m = 1, a = 1)
   dbinom(x = y, size = m, prob = mu / m, log = TRUE)
 jllm.negBinomial <- function(y, mu, m = 1, a = 1) {
   dnbinom(y, mu = mu, size = 1 / a, log = TRUE)
@@ -44,7 +44,7 @@ unlink.probit <- function(y, eta, m = 1, a = 1) m * pnorm(eta)
 
 linkFn.log <- function(mu, m = 1, a = 1) log(mu)
 lPrime.log <- function(mu, m = 1, a = 1) 1/mu
-unlink.log <- function(y, eta, m = 1, a = 1) exp(eta)  
+unlink.log <- function(y, eta, m = 1, a = 1) exp(eta)
 
 linkFn.identity <- function(mu, m = 1, a = 1) mu
 lPrime.identity <- function(mu, m = 1, a = 1) 1
@@ -86,7 +86,7 @@ Sjll <- function(b.hat, X, y, offset = 0, ...) {
   sum(jll(y, y.hat, ...))
 }
 
-## Changed arguments for logit1 
+## Changed arguments for logit1
 
 # unlink <- function(y, eta) UseMethod("unlink")
 unlink.logit1 <- function(y, eta, m=1, a=1) 1 / (1 + exp(-eta))
@@ -98,7 +98,7 @@ unlink.cloglog1 <- function(y, eta, ...) 1-exp(-exp(eta))
 unlink.probit1 <- function(y, eta, ...) pnorm(eta)
 
 maximize <- function(start, f, X, y, offset = 0, ...) {
-  optim(par = start,           
+  optim(par = start,
         fn = f,
         X = X,
         y = y,
@@ -124,13 +124,13 @@ jll.poisson <- function(y, y.hat, ...) {
   dpois(y, lambda = y.hat, log = TRUE)
 }
 
-unlink.log <- function(y, eta, m=1, a=1) exp(eta)  
+unlink.log <- function(y, eta, m=1, a=1) exp(eta)
 
 kickStart.log <- function(y, X, offset = 0) {
   coef(lm(I((log(y + 0.1) - offset) ~ X - 1)))
 }
 
-jll.ztp <- function(y, y.hat, ...) 
+jll.ztp <- function(y, y.hat, ...)
   dpois(y, lambda = y.hat, log = TRUE) - log(1 - exp(-y.hat))
 
 jll2 <- function(y, y.hat, scale, ...) UseMethod("jll2")
@@ -142,7 +142,7 @@ jll2.negBinomial <- function(y, y.hat, scale, ...) {
           log = TRUE)
 }
 
-jll2.nb2 <- function(y, y.hat, scale) {
+jll2.nb2 <- function(y, y.hat, scale, ...) {
   dnbinom(y,
           size = scale,
           mu = y.hat, log = TRUE)
@@ -187,11 +187,11 @@ getDispersion.gamma <- function(y, scale) scale
 pearsonResiduals2 <- function(y, b.hat, X, p, offset = 0) {
   y.hat <- predict(y, b.hat[1:p], X[,1:p], offset)
   scale <- predict_s(y, b.hat[-(1:p)], X[,-(1:p)])
-  (y - y.hat) / sqrt(y.hat+ 1/scale*y.hat*y.hat) 
+  (y - y.hat) / sqrt(y.hat+ 1/scale*y.hat*y.hat)
 }
 
 
-kickStart.inverse <- function(y, X, family, offset = NULL) {
+kickStart.inverse <- function(y, X, offset = NULL) {
   coef(lm(I(1/(y)) ~ X - 1), offset = offset)
 }
 
